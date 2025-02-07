@@ -1,15 +1,29 @@
-name: Tests
+name: CI - Tests & Validation
+
 on:
   pull_request:
     branches: [main]
   push:
     branches: [main]
+
 jobs:
   test:
+    name: Run Unit Tests
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
-        with: { python-version: '3.x' }
-      - run: pip install pytest
-      - run: pytest tests/test_fizzbuzz.py
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          pip install pytest
+
+      - name: Run unit tests
+        run: pytest tests/test_fizzbuzz.py
