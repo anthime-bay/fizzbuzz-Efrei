@@ -1,17 +1,17 @@
-# Utiliser une image de base officielle de Python
+# Use official Python image
 FROM python:3.9-slim
 
-# Définir le répertoire de travail dans le conteneur
+# Set work directory
 WORKDIR /app
 
-# Copier les fichiers nécessaires dans le conteneur
+# Copy all files
 COPY . /app
 
-# Installer les dépendances nécessaires
-RUN pip install --no-cache-dir -r requirements.txt
+# Install dependencies
+RUN pip install --no-cache-dir -r requirements.txt pytest
 
-# Installer pytest pour les tests
-RUN pip install pytest
+# Ensure Python can find the modules in /app
+ENV PYTHONPATH=/app
 
-# Exécuter les tests
+# Run tests
 CMD ["pytest"]
