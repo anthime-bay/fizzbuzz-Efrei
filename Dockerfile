@@ -14,4 +14,5 @@ RUN pip install --no-cache-dir -r requirements.txt pytest
 ENV PYTHONPATH=/app
 
 # Run tests
-CMD ["pytest", "fizzbuzz.py"]
+CMD ["python", "fizzbuzz.py"]
+#CMD ["pytest"]
